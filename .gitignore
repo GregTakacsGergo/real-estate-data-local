@@ -1,3 +1,4 @@
 config.py
 .localvenv
+.venv
 __pycache__
