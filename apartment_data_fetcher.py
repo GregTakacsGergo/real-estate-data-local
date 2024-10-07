@@ -4,6 +4,7 @@ import re
 import statistics
 from datetime import datetime 
 import huf_to_eur
+from config import SCRAPING_TARGET
 
 class ApartmentDataFetcher:
     def __init__(self, url):
@@ -21,7 +22,7 @@ class ApartmentDataFetcher:
             self.prices = [price.find("span", class_="price-value").text.strip().replace(" ","") 
                            for price in all_prices if price.find("span", class_="price-value")]
             if not self.prices:
-                print("Nem található árinformáció.")
+                print("No price information found.")
         else:
             print(response.status_code)
 
@@ -33,13 +34,13 @@ class ApartmentDataFetcher:
             self.areas = [re.sub(r'm²','',area.find("div", class_="size").get_text(strip=True)) 
                           for area in all_areas if area.find("div", class_="size")]
             if not self.areas:
-                print("Nem található alapterület információ.")  
+                print("No area information found.")  
         else:
             print(response.status_code) 
 
     def price_per_sqm(self):
         if len(self.prices) != len(self.areas):
-            print("Hiba: Az árak és területek listáinak hossza nem egyezik meg.")
+            print("Number of prices and areas do not match.")
             return None
         huf_per_sqm = list(set([float(x) / float(y) for x, y in zip(self.prices, self.areas)]))
         return huf_per_sqm
@@ -59,7 +60,7 @@ class ApartmentDataFetcher:
             return None
 
 def main():
-    url = "https://ingatlan.jofogas.hu/hajdu-bihar/debrecen/lakas?max_size=60&min_size=50&st=s"
+    url = SCRAPING_TARGET
     fetcher = ApartmentDataFetcher(url)
     apartment_data = fetcher.get_apartment_data()
     if apartment_data:

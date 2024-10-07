@@ -44,6 +44,9 @@ pip install -r requirements.txt
 You should ask Greg for the url target, and save it as a variable in your config.py file:
 
 ```python 
-SCRAPING_TARGET = "a url that leads to a site for which the apartment_data_fetcher.py is customized"
+SCRAPING_TARGET = "a url that leads to a site on which the apartment_data_fetcher.py is customized"
 ```
+
+
+
 

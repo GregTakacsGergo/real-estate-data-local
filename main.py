@@ -6,7 +6,6 @@ from config import SCRAPING_TARGET
 data = []
 
 def main():
-
     url = SCRAPING_TARGET
     data_fetcher = apartment_data_fetcher.ApartmentDataFetcher(url)
     apartment_data = data_fetcher.get_apartment_data()
@@ -17,7 +16,8 @@ def main():
         db_handler.create_table()
         db_handler.insert_data_db(*data)
         visualization.visualize()
-        
+    else: print("No data found.")   
+
 if __name__ == "__main__":
     main()    
 
