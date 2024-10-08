@@ -1,4 +1,4 @@
-config.py
-.localvenv
-.venv
-__pycache__
+config.py/
+.localvenv/
+.venv/
+__pycache__/
